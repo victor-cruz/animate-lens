@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>jQuery Topbar message Plugin Demo</title>
+	<script src="../lib/jquery.js" type="text/javascript"></script>
+	<script src="../src/jquery.imageLens.js" type="text/javascript"></script>
+	<script type="text/javascript" language="javascript">
+		$(function () {
+			$("#img_01").imageLens();
+			$("#img_02").imageLens({ lensSize: 200 });
+			$("#img_03").imageLens({ imageSrc: "sample01.jpg" });
+			$("#img_04").imageLens({ borderSize: 8, borderColor: "#06f" });
+      $("#img_05").imageLens({ lensSize: 175, borderSize:0 });
+		});	
+	</script>
+
+	<style type="text/css">
+		body { margin: 0px; font-family: "Trebuchet MS", Arial, Sans-Serif; font-size: 14px; }
+		a { color: #0066CC; text-decoration: none; }
+		a:hover { color: #CC0000; text-decoration: underline; }
+	</style>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      function updateImageLens(){
+        var evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent("mousemove", true, true, window,
+                0, 0, 0, $("#lens").position().left +100, $("#lens").position().top +100, false, false, false, false, 0, null);
+        var cb = document.getElementById("img_05");
+        !cb.dispatchEvent(evt);
+      }
+
+      $("#lens").animate({left: $("#img_05").position().left+160}, {duration: 1000, step: updateImageLens, complete: function(){
+        $("#lens").animate({left: $("#img_05").position().left+10}, {duration: 800, step: updateImageLens});
+      }});
+    });
+  </script>
+
+</head>
+<body style="margin-left: 25px;">
+	<table>
+    <tr>
+      <td>
+        <p>&nbsp;</p>
+        <h3>Demo 5 - Animating</h3>
+        <p>
+          <img  id="lens" src="lens.png" style="z-index:1; position: absolute"></div>
+          <img id="img_05" src="sample01.jpg" width="384" height="240" />
+        </p>
+        <pre>$("#img_05").imageLens({ lensSize: 175, borderSize:0 });</pre>
+      </td>
+    </tr>
+		<tr>
+			<td>
+				<p><i>Note - If you are using IE 8 or lower than you will see a square lens</i></p>
+				<h3>Demo 1 - Default lens</h3>
+				<p>
+					<img id="img_01" src="sample01.jpg" width="384" height="240" />
+				</p>
+				<pre>$("#img_01").imageLens();</pre>
+				
+				<p>&nbsp;</p>
+				<h3>Demo 2 - Custom lens size</h3>
+				<p>
+					<img id="img_02" src="sample01.jpg" width="384" height="240" />
+				</p>
+				<pre>$("#img_02").imageLens({ lensSize: 200 });</pre>
+				
+			</td>
+			<td>
+				<p>&nbsp;</p>
+				<h3>Demo 3 - Custom image source</h3>
+				<p>
+					<img id="img_03" src="sample01_s.jpg" width="384" height="240" />
+				</p>
+				<pre>$("#img_03").imageLens({ imageSrc: "sample01.jpg" });</pre>
+				
+				<p>&nbsp;</p>
+				<h3>Demo 4 - Other lens properties</h3>
+				<p>
+					<img id="img_04" src="sample01.jpg" width="384" height="240" />
+				</p>
+				<pre>$("#img_04").imageLens({ borderSize: 8, borderColor: "#06f" });</pre>
+			</td>
+
+    <td valign="top" style="text-align: right;">
+	&nbsp;
+    </td>
+
+		</tr>
+	</table>
+
+</body>
+</html>
